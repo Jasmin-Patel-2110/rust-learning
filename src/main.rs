@@ -2,6 +2,8 @@ fn main() {
     loop_main();
     ownership_main();
     borrow_main();
+    struct_main();
+    enum_and_patt_matching_main();
 }
 
 // Loops and Conditionals
@@ -107,4 +109,87 @@ fn mut_reference_02() {
 
 fn update_str(s: &mut String) {
     s.push_str("World!");
+}
+
+// Struct
+// similer to classes in JS/TS.
+struct Rect {
+    width: u32,
+    height: u32,
+}
+
+impl Rect {
+    fn area(&self) -> u32 {
+        return self.width * self.height;
+    }
+    fn perimeter(&self) -> u32 {
+        return 2 * (self.width + self.height);
+    }
+}
+
+struct unit_struct; // struct with just implementations (functions only, no attributes)
+
+impl unit_struct {
+    fn f1(&self) {}
+    fn f2(&self) {}
+    fn f3(&self) {}
+}
+
+fn struct_main() {
+    let r1 = Rect {
+        width: 30,
+        height: 20,
+    };
+
+    println!("area of r1 is {}", r1.area());
+    println!("perimeter of r1 is {}", r1.perimeter());
+
+    let u = unit_struct {}; // no attributes/variables
+    u.f1();
+    u.f2();
+    u.f3();
+}
+
+// enums and pattern matching in enums
+enum Direction {
+    up,
+    down,
+    left,
+    right,
+    none, // stationary
+}
+
+fn move_around(direction: Direction) {
+    // logic to move the character around
+}
+
+// enums with values
+enum Shape {
+    Circle(f64),         // associated data (radius)
+    Square(f64),         // associated data (length)
+    Rectangle(f64, f64), // associated data (width, height)
+}
+
+// function to calc area based on shape
+fn calc_area(shape: Shape) -> f64 {
+    // pattern matching in enum
+    let ans = match shape {
+        Shape::Circle(radius) => std::f64::consts::PI * radius * radius,
+        Shape::Square(length) => length * length,
+        Shape::Rectangle(width, height) => width * height,
+    };
+    return ans;
+}
+
+fn enum_and_patt_matching_main() {
+    let my_direction = Direction::none;
+    move_around(my_direction);
+
+    let circle = Shape::Circle(5.4);
+    let square = Shape::Square(8.0);
+    let rect = Shape::Rectangle(3.5, 6.4);
+
+    println!("area of circle: {}", calc_area(circle));
+    println!("area of square: {}", calc_area(square));
+    println!("area of rect: {}", calc_area(rect));
 }
