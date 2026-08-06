@@ -1,9 +1,14 @@
+use rand::random;
+use std::{fs, io::Error};
+
 fn main() {
     loop_main();
     ownership_main();
     borrow_main();
     struct_main();
     enum_and_patt_matching_main();
+    err_option_generics_main();
+    cargo_pkgs_deps_main();
 }
 
 // Loops and Conditionals
@@ -192,4 +197,73 @@ fn enum_and_patt_matching_main() {
     println!("area of circle: {}", calc_area(circle));
     println!("area of square: {}", calc_area(square));
     println!("area of rect: {}", calc_area(rect));
+}
+
+// Error Handling and Generics
+
+// Result enum:
+// enum Result<T, E>{
+//      Ok(T),
+//      Err(E),
+// }
+//
+// Rust doesn't have null instead it has Option enum.
+// Option Enum:
+// enum Option<T> {
+//      None,
+//      Some(T),
+// }
+
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+fn err_option_generics_main() {
+    // generics
+    let int_point: Point<i32> = Point { x: 4, y: 6 };
+    let float_point: Point<f32> = Point { x: 13.2, y: 43.2 };
+
+    // Error handling
+    let res: Result<String, Error> = fs::read_to_string("example.txt");
+
+    match res {
+        Ok(content) => {
+            println!("File Content: {}", content);
+        }
+        Err(err) => {
+            println!("Error: {}", err);
+        }
+    }
+    println!("Line after error."); // error will not crash the thread so it will get printed.
+
+    // Option Enum
+    let my_string = String::from("raman");
+    let res: Option<usize> = find_first_a(my_string);
+
+    match res {
+        Some(index) => println!("Letter 'a' is found at index: {}", index),
+        None => println!("Letter 'a' not found in the string"),
+    }
+}
+
+fn find_first_a(s: String) -> Option<usize> {
+    for (index, character) in s.chars().enumerate() {
+        if character == 'a' {
+            return Some(index);
+        }
+    }
+    return None;
+}
+
+// cargo, packages and external deps
+
+// cargo add <pkg_name> to add the packages in project
+
+// Random Number Generator
+// cargo add rand
+
+fn cargo_pkgs_deps_main() {
+    // Random num gen
+    println!("Random Number: {}", random::<u8>())
 }
