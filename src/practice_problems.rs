@@ -5,11 +5,7 @@ pub fn practice_problems_main() {
 
     // string length
     let s1: String = String::from("Hello");
-    println!(
-        "Length of the string '{}' is {}",
-        s1,
-        get_string_length(&s1)
-    );
+    println!("Length of the string '{}' is {}", s1, get_string_length(&s1));
 }
 
 // Write a function fib that finds the fibbonacci of the number is taks as input.

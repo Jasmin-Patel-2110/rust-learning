@@ -145,10 +145,7 @@ impl unit_struct {
 }
 
 fn struct_main() {
-    let r1 = Rect {
-        width: 30,
-        height: 20,
-    };
+    let r1 = Rect { width: 30, height: 20 };
 
     println!("area of r1 is {}", r1.area());
     println!("perimeter of r1 is {}", r1.perimeter());
