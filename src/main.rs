@@ -1,3 +1,5 @@
+mod practice_problems;
+
 use rand::random;
 use std::{fs, io::Error};
 
@@ -9,6 +11,8 @@ fn main() {
     enum_and_patt_matching_main();
     err_option_generics_main();
     cargo_pkgs_deps_main();
+
+    practice_problems::practice_problems_main();
 }
 
 // Loops and Conditionals
@@ -235,7 +239,7 @@ fn err_option_generics_main() {
             println!("Error: {}", err);
         }
     }
-    println!("Line after error."); // error will not crash the thread so it will get printed.
+    println!("Line after error."); // error will not crash the thread so this line will get printed.
 
     // Option Enum
     let my_string = String::from("raman");
