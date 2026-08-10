@@ -1,3 +1,4 @@
+mod collections;
 mod practice_problems;
 
 use rand::random;
@@ -13,6 +14,7 @@ fn main() {
     cargo_pkgs_deps_main();
 
     practice_problems::practice_problems_main();
+    collections::collections_main();
 }
 
 // Loops and Conditionals
