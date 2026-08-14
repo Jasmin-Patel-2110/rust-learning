@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 pub fn practice_problems_main() {
     // Fibbonacci
     let num1: u32 = 3;
@@ -10,6 +12,15 @@ pub fn practice_problems_main() {
     // take vec of nums and return vec of only even nums
     let res_vec = to_even_vec(&vec![12, 23, 43, 44, 65, 66, 77, 82]);
     println!("result vec with only even nums: {:?}", res_vec);
+
+    let res_hm = tups_to_hashmap(vec![
+        (String::from("apple"), 1),
+        (String::from("banana"), 2),
+        (String::from("apple"), 3),
+        (String::from("orange"), 4),
+        (String::from("banana"), 5),
+    ]);
+    println!("Created HashMap: {:?}", res_hm);
 }
 
 // Write a function fib that finds the fibbonacci of the number is taks as input.
@@ -46,4 +57,25 @@ fn to_even_vec(vec: &Vec<i32>) -> Vec<i32> {
     }
 
     return new_vec;
+}
+
+// Write a function that takes a vector of tuples (each tuple containing a key and a value)
+// and returns a Hashmap where the keys are the unique keys from the input tuples and
+// the values are vectors of all corresponding values assosiated with each key.
+fn tups_to_hashmap(pairs: Vec<(String, i32)>) -> HashMap<String, Vec<i32>> {
+    let mut hm = HashMap::<String, Vec<i32>>::new();
+
+    for (key, val) in pairs {
+        let res = hm.get_mut(&key);
+
+        match res {
+            Some(vec) => {
+                vec.push(val);
+            }
+            None => {
+                hm.insert(key, vec![val]);
+            }
+        }
+    }
+    return hm;
 }
